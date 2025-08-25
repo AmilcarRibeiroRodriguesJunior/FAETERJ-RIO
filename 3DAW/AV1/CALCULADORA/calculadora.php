@@ -56,5 +56,4 @@
 
 <?php
     echo "<h1>Resultado = $resultado</h1>";
-    echo "<button onclick=\"window.location.href='calculadora.html'\">Voltar</button>";
 ?>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depoimentos - Edinho Fretes</title>
+    <style>
+        /* Estilos gerais */
+        /* Reset básico */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header, nav, main, footer {
+            padding: 20px;
+            margin: 10px;
+        }
+        header {
+            background-color: #0073e6;
+            color: #fff;
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 10px;
+        }
+        nav {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+        }
+        nav a {
+            color: #fff;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            background-color: #0073e6;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 10px;
+            margin-top: 20px;
+            padding: 15px 20px;
+        }
+        /* Estilos específicos */
+        main {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h2 {
+            color: #0073e6;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .intro {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+            color: #555;
+        }
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px; /* Ajusta o espaçamento entre o formulário e os cards */
+            justify-content: center; /* Centraliza os itens horizontalmente */
+            align-items: start; /* Garante alinhamento superior */
+            margin: 20px auto; /* Espaçamento ao redor */
+            max-width: 1200px; /* Limita a largura máxima para melhor alinhamento */
+        }
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* Estilos do formulário */
+        .form-container {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: none; /* Remove a restrição de largura */
+            height: auto; /* Ajusta a altura automaticamente */
+            margin: 0 auto; /* Centraliza o formulário */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .form-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        .form-container h2 {
+            color: #0073e6;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5em;
+            text-transform: uppercase;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #444;
+            font-size: 0.9em;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #0073e6;
+            background-color: #fff;
+            outline: none;
+            box-shadow: 0px 0px 8px rgba(0, 115, 230, 0.2);
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .form-group button {
+            background-color: #0073e6;
+            color: #fff;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+            width: 100%; /* Botão ocupa toda a largura */
+        }
+        .form-group button:hover {
+            background-color: #005bb5;
+            transform: scale(1.05);
+        }
+        .form-group button:active {
+            transform: scale(0.98);
+        }
+        .form-group .helper-text {
+            font-size: 0.8em;
+            color: #888;
+            margin-top: 5px;
+        }
+        .testimonial {
+            border: 1px solid #ddd;
+            padding: 15px;
+            width: 100%; /* Faz com que os cards ocupem toda a largura disponível no grid */
+            max-width: 500px; /* Limita o tamanho máximo dos cards */
+            margin: 0 auto; /* Centraliza os cards individualmente */
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .testimonial h3 {
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .testimonial p {
+            font-style: italic;
+            color: #555;
+            margin: 8px 0;
+        }
+        .stars {
+            margin: 5px 0;
+        }
+        .stars span {
+            font-size: 1.5em;
+            color: gold;
+        }
+        .stats {
+            background-color: #e6f7ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .stats h3 {
+            color: #0073e6;
+        }
+        .stats p {
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px; /* Reduzido para diminuir o espaçamento entre os cards */
+            justify-content: center; /* Alinha os cards no centro horizontalmente */
+            align-items: center; /* Alinha os cards verticalmente */
+            margin: 0 auto; /* Centraliza a grade dentro do contêiner */
+            max-width: 800px; /* Limita a largura máxima para manter os cards alinhados */
+            width: 100%; /* Garante que os cards ocupem toda a largura da coluna */
+    height: auto; /* Ajusta a altura automaticamente */
+        }
+        .button {
+            background-color: #0073e6;
+            color: #fff;
+            padding: 12px 25px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 20px auto;
+            text-align: center;
+            font-size: 1em;
+        }
+        .button:hover {
+            background-color: #005bb5;
+        }
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Depoimentos</h1>
+        <p>Descubra o que nossos clientes têm a dizer sobre nossos serviços</p>
+    </header>
+    
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="rastreamento.html">Rastreamento</a>
+        <a href="cotacao.html">Cotação</a>
+        <a href="pagamento.html">Pagamento</a>
+    </nav>
+    
+    <main>
+            <!-- Estatísticas -->
+            <div class="stats">
+                <h3>Nossas Estatísticas</h3>
+                <p>✔ 500+ entregas realizadas</p>
+                <p>✔ 98% de satisfação dos clientes</p>
+                <p>✔ 24/7 atendimento disponível</p>
+            </div>
+        
+        <div class="main-container">
+            <!-- Formulário -->
+            <div class="form-container">
+                <h2>Deixe seu Depoimento</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="localizacao">Cidade/Estado</label>
+                        <input type="text" id="localizacao" name="localizacao" placeholder="Exemplo: São Paulo, SP" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="avaliacao">Avaliação</label>
+                        <select id="avaliacao" name="avaliacao" required>
+                            <option value="">Selecione</option>
+                            <option value="5">5 Estrelas</option>
+                            <option value="4">4 Estrelas</option>
+                            <option value="3">3 Estrelas</option>
+                            <option value="2">2 Estrelas</option>
+                            <option value="1">1 Estrela</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="depoimento">Depoimento</label>
+                        <textarea id="depoimento" name="depoimento" rows="5" placeholder="Escreva seu depoimento aqui..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Enviar Depoimento</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Cards de Depoimentos -->
+            <div class="grid-container">
+                <!-- Card 1 -->
+            <div class="testimonial">
+                <h3>João Silva</h3>
+                <p class="location">Rio de Janeiro, RJ</p> <!-- Adicionado -->
+                <div class="stars">
+                    <span>★ ★ ★ ★ ★</span>
+                </div>
+                <p>"Serviço excelente! Meu envio chegou no prazo e o atendimento foi impecável."</p>
+            </div>
+            <!-- Card 2 -->
+            <div class="testimonial">
+                <h3>Maria Oliveira</h3>
+                <p class="location">Belo Horizonte, MG</p> <!-- Adicionado -->
+                <div class="stars">
+                    <span>★ ★ ★ ★ ☆</span>
+                </div>
+                <p>"Gostei muito da experiência. O rastreamento em tempo real é muito útil."</p>
+            </div>
+            <!-- Card 3 -->
+            <div class="testimonial">
+                <h3>Carlos Santos</h3>
+                <p class="location">Curitiba, PR</p> <!-- Adicionado -->
+                <div class="stars">
+                    <span>★ ★ ★ ★ ★</span>
+                </div>
+                <p>"Transparência e rapidez. Recomendo o serviço para todos!"</p>
+            </div>
+            <!-- Card 4 -->
+            <div class="testimonial">
+                <h3>Ana Paula</h3>
+                <p class="location">Fortaleza, CE</p> <!-- Adicionado -->
+                <div class="stars">
+                    <span>★ ★ ★ ★ ☆</span>
+                </div>
+                <p>"Sem dúvidas, o melhor serviço de fretes que já utilizei. Parabéns pela eficiência!"</p>
+            </div>
+            <!-- Card 5 -->
+            <div class="testimonial">
+                <h3>Fernando Lima</h3>
+                <p class="location">São Paulo, SP</p> <!-- Adicionado -->
+                <div class="stars">
+                    <span>★ ★ ★ ★ ★</span>
+                </div>
+                <p>"Atendimento excepcional e preços competitivos. Muito satisfeito!"</p>
+            </div>
+            <!-- Card 6 -->
+            <div class="testimonial">
+                <h3>Beatriz Costa</h3>
+                <p class="location">Salvador, BA</p> <!-- Adicionado -->
+                <div class="stars">
+                    <span>★ ★ ★ ★ ☆</span>
+                </div>
+                <p>"O serviço foi rápido e eficiente, mas poderia ter mais opções de rastreamento."</p>
+            </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Edinho Fretes - Todos os direitos reservados | Política de Privacidade</p>
+    </footer>
+</body>
+</html>

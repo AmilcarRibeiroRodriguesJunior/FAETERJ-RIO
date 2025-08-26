@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processar Pagamento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #0073e6;
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .button {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background-color: #0073e6;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        #payment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        #payment-form label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        #payment-form input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        #payment-form button {
+            width: 100%;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            padding: 10px 0;
+            transition: background-color 0.3s ease;
+        }
+        #payment-form button:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Edinho Fretes</h1>
+        <p>A melhor empresa no ramo de fretes de Jacarepaguá!</p>
+    </header>
+    <section id="pagamento">
+        <h2>Sistema de Pagamento Seguro</h2>
+        <p>Utilizamos métodos de pagamento seguros para proteger os seus dados. Insira os detalhes abaixo:</p>
+        
+        <!-- Formulário redireciona para a página processar-pagamento.html -->
+        <form id="payment-form" action="processar-pagamento.html" method="GET">
+            <label for="nome">Nome no Cartão:</label>
+            <input type="text" id="nome" name="nome" placeholder="Nome completo" required>
+    
+            <label for="numero-cartao">Número do Cartão:</label>
+            <input type="text" id="numero-cartao" name="numero-cartao" placeholder="XXXX-XXXX-XXXX-XXXX" required maxlength="19" pattern="\d{4}-\d{4}-\d{4}-\d{4}">
+            
+            <label for="validade">Validade:</label>
+            <input type="month" id="validade" name="validade" required>
+    
+            <label for="cvv">CVV:</label>
+            <input type="password" id="cvv" name="cvv" placeholder="123" required maxlength="3" pattern="\d{3}">
+    
+            <button type="submit"></button>
+            <a href="pagamento-processado.html" class="button">Confirmar Pagamento
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Edinho Fretes - Todos os direitos reservados</p>
+    </footer>
+</body>
+</html>

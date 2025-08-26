@@ -1,0 +1,55 @@
+* 
+.container {
+    width: 160px;
+    height: 200px;
+}
+
+.container:hover > .card{
+    cursor: pointer;
+    transform: rotateY(180deg);
+    perspective: 800px;
+}
+
+.card {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    transition: transform 1500ms;
+    transform-style: preserve-3d;
+}
+
+.front,
+.back {
+    height: 100%;
+    width: 100%;
+    border-radius: 2rem;
+    box-shadow: 0 0 5px 2px rgba(50, 50, 50, 0.25);
+    position: absolute;
+    backface-visibility: hidden;
+}
+
+.front {
+    background-image: url(https://png.pngtree.com/png-clipart/20240713/original/pngtree-yellow-wow-surprise-emoji-with-full-body-png-image_15549307.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.back {
+    background-color: rgb(85, 63, 9);
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    color: white;
+}
+.back h2 {
+    font-size: 0.9rem;
+}
+
+.back p {
+    font-size: 0.5rem;
+    line-height: 1.2;
+}

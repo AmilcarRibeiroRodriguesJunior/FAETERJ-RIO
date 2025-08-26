@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criptomoedas - Sobre</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f0f2f5;
+            color: #333; 
+        }
+        header { 
+            background-color: black; 
+            color: #fff; 
+            display: flex; 
+            align-items: center; 
+            padding: 20px; 
+        }
+        header img {
+            height: 50px;
+            width: auto; 
+        }
+        header h1 {
+            margin: 0; 
+            font-size: 24px;
+            text-align: center; 
+            flex-grow: 1;
+        }
+        nav a { 
+            color: #fff; 
+            text-decoration: none; 
+            margin: 0 15px; 
+            font-weight: bold; 
+        }
+        nav a:hover { 
+            text-decoration: underline; 
+        }
+        main { 
+            padding: 20px;
+        }
+        footer {
+            background-color: black; 
+            color: #fff; 
+            text-align: center; 
+            padding: 10px; 
+            position: relative;
+            margin-top: 20px;
+            bottom: 0; 
+        }
+        img {
+            max-width: 90px;
+            height: auto;
+            margin: 5px 0;
+        }
+        .accordion {
+            margin: 20px 0;
+        }
+        .accordion-button {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            outline: none;
+            transition: background-color 0.3s ease;
+        }
+        .accordion-button:hover {
+            background-color: #3c8ee6;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: #f1f1f1;
+            padding: 0 10px;
+        }
+        .accordion-content p {
+            margin: 10px 0;
+        }
+        .accordion-button.active + .accordion-content {
+            max-height: 100px;
+            padding: 10px 10px;
+        }
+        form {
+            font-family: 'Poppins', sans-serif;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        label {
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: block;
+        }
+        input[type="text"],
+        input[type="email"] {
+            font-family: 'Poppins', sans-serif ;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .message {
+            display: none;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://cdn-icons-png.flaticon.com/512/5341/5341401.png" alt="Minerando Bitcoin">
+        <h1>Sobre as Criptomoedas</h1>
+        <nav>
+            <a href="inicio.html">Início</a>
+            <a href="sobre.html">Sobre</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="accordion">
+            <h2>O que são as criptomoedas?</h2>
+            <img src="https://brasilbitcoin.com.br/index/v5/images/fcc/fcc.png" alt="Criptomoedas">
+            <button class="accordion-button">Clique para saber mais</button>
+            <article class="accordion-content">
+                <p>Uma criptomoeda ou cibermoeda é um meio de troca, geralmente descentralizado, que se utiliza da tecnologia de blockchain e da criptografia para
+                     assegurar a validade das transações e a criação de novas unidades da moeda. O Bitcoin, a primeira criptomoeda descentralizada, foi criado em 2009
+                      por um usuário que usou o pseudônimo Satoshi Nakamoto. Desde então, muitas outras criptomoedas foram criadas.
+                      Mais recentemente, tem-se assistido a um fenômeno de explosão de inúmeros tokens que têm sido criados com base no protocolo do Ethereum, 
+                      principalmente após a onda massiva de Ofertas Iniciais de Moedas (usualmente referida como ICO, do inglês Initial Coin Offering) que ocorreu em 2017.
+                </p>
+            <article>
+        </section>
+
+        <section class="accordion">
+            <h2>Como investir em criptomoedas?</h2>
+            <img src="https://brasilbitcoin.com.br/index/v5/images/fcc/fcc.png" alt="Investimento em Cripto">
+            <button class="accordion-button">Clique para saber mais</button>
+            <article class="accordion-content">
+                <p>Para investir em criptomoedas, você precisa ser cadastrado em uma corretora de valores que ofereça esse tipo de investimento. 
+                    As corretoras especializadas em moedas digitais, também conhecidas como exchanges, oferecem inúmeras opções. 
+                    Por meio delas, é possível negociar a compra e venda desses ativos.
+                </p>
+            </article>
+        </section>
+        
+
+        <section>
+            <h2 style="text-align: center;">Receba as últimas atualizações por e-mail:</h2>
+            <form id="newsletter-form">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" required placeholder="Digite seu nome">
+
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required placeholder="Digite seu e-mail">
+
+            <button type="submit">Inscrever-se</button>
+        </form>
+            <p class="message" id="confirmation-message">
+                Você receberá as novidades sobre criptomoedas no seu e-mail cadastrado!
+            </p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Mundo das Criptomoedas - Página desenvolvida por Amilcar Ribeiro Rodrigues Júnior. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        const accordionButtons = document.querySelectorAll('.accordion-button');
+
+        accordionButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const content = button.nextElementSibling;
+
+                button.classList.toggle('active');
+
+                if (button.classList.contains('active')) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                } else {
+                    content.style.maxHeight = '0';
+                }
+            });
+        });
+
+        document.getElementById('newsletter-form').addEventListener('submit', function (event) {
+            event.preventDefault(); 
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+
+            const confirmationMessage = document.getElementById('confirmation-message');
+            confirmationMessage.style.display = 'block';
+
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+        });
+    </script>
+</body>
+</html>

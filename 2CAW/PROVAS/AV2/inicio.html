@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criptomoedas - Página Inicial</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <style>
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            margin: 0; padding: 0; 
+        } 
+        header { 
+            background-color: black; 
+            color: #fff; 
+            display: flex; 
+            align-items: center; 
+            padding: 20px; 
+        }
+        header img {
+            height: 50px;
+            width: auto; 
+        }
+        header h1 {
+            margin: 0; 
+            font-size: 24px;
+            text-align: center; 
+            flex-grow: 1;
+        }
+        footer { 
+            position: relative;
+            background-color: black; 
+            color: white; 
+            text-align: center; 
+            padding: 10px 0;
+            z-index: 2;
+        } 
+        nav a {
+            color: white; 
+            margin: 0 10px; 
+            text-decoration: none; 
+            font-weight: bold; 
+        } 
+        main { 
+            background-color: gray;
+            padding: 20px; 
+        } 
+        aside { 
+            position: absolute;
+            top: 90px;
+            bottom: 40px;
+            width: 210px;
+            height: 980px;
+            background-color: antiquewhite;
+            color: black;
+            padding: 15px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            z-index: 1;
+        }
+        section.content { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            flex-direction: column; 
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            border-radius: 5px;
+            margin: 20px;
+            overflow: hidden;
+        }
+        th, td {
+           padding: 5px;
+           text-align: center;
+           border: 5px solid antiquewhite;
+        }
+        .th, td img { 
+            width: 15px; 
+            height: auto;
+        }
+        .card {
+            padding: 5px;  
+            margin-bottom: 50px;    
+        }
+        .card h2 {
+            font-size: 1.2rem;
+            margin: 0 0 2px 0;
+        }
+        .card p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        h3 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        @keyframes blink-colorful {
+            0% { color: red; }
+            25% { color: blue; }
+            50% { color: green; }
+            75% { color: skyblue }
+            100% { color: red; }
+        }
+        .blinking-text {
+           animation: blink-colorful 1.5s infinite;
+           font-size: 1.2rem;
+           font-weight: bold;
+           text-align: center;
+        }
+        .video-container {
+           max-width: 800px;
+           margin: 0 auto;
+           text-align: center;
+        }
+        .video-container iframe,
+        .video-container form {
+           display: inline-block;
+           vertical-align: top;
+           box-sizing: border-box;
+           margin-top: 10px;
+        }
+        .video-container form {
+           text-align: left;
+           padding: 10px;
+           border: 1px solid #ccc;
+           border-radius: 5px;
+           background-color: #f9f9f9;
+        }
+        iframe {
+           width: 516px;
+           height: 315px;
+           border-radius: 10px;
+           box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .noticias li {
+           margin-bottom: 15px;
+        }
+        ul {
+           margin-top: 25px;
+        }
+        .botao-sobre {
+           margin-top: 15px;
+           padding: 10px 20px;
+           font-size: 16px;
+           color: antiquewhite;
+           background-color: #007bff;
+           border: none;
+           border-radius: 5px;
+           cursor: pointer;
+           font-family: 'Poppins', sans-serif;
+        }
+        .botao-sobre:hover {
+           background-color: #3c8ee6;
+        }
+    </style>
+
+    <header>
+        <img src="https://cdn-icons-png.flaticon.com/512/5341/5341401.png" alt="Minerando Bitcoin">
+        <h1>Bem-vindo ao Mundo das Criptomoedas</h1>
+        <nav>
+            <a href="inicio.html">Início</a>
+            <a href="sobre.html">Sobre</a>
+        </nav>
+    </header>
+
+    <aside>
+        <p class="blinking-text">PASSE O MOUSE SOBRE O CARD!</p>
+        <div class="container">
+          <div class="card">
+            <div class="front"></div>
+            <div class="back">
+              <h2>Curiosidade</h2>
+              <p>Em 22 de maio de 2010, o programador Laszlo Hanyecz comprou duas pizzas por 10.000 Bitcoins.</p>
+            </div>
+          </div>
+        </div>
+         <h3>Últimas Notícias</h3>
+            <ul class="noticias">
+              <li><a href="https://cointelegraph.com/news/bitcoin-new-90k-btc-price-target-dip-liquidations" target="_blank">O Bitcoin enfrenta uma queda de 3%</a></li>
+              <li><a href="https://cointelegraph.com/news/ether-price-correction-2025-target" target="_blank">Preço do Ethereum enfrenta correção antes de subir para US$ 20 mil em 2025</a></li>
+            </ul>
+         <button id="sobre-btn" class="botao-sobre">Saiba mais sobre as criptos aqui!</button>
+         <h3>Nossas redes sociais</h3>
+            <ul>
+              <li><a href="https://twitter.com/criptomoedas" target="_blank">Twitter (X)</a></li>
+              <li><a href="https://www.facebook.com/criptomoedas" target="_blank">Facebook</a></li>
+              <li><a href="https://www.instagram.com/criptomoedas" target="_blank">Instagram</a></li>
+            </ul>
+    </aside>
+
+    <main>
+        <section class="content">
+            <h2>Principais Criptomoedas</h2>
+            <table>
+                <tr>
+                    <th>Moeda</th>
+                    <th>Preço Atual</th>
+                </tr>
+                <tr>
+                    <td>Bitcoin
+                        <img src="https://www.bussoladoinvestidor.com.br/wp-content/uploads/2015/04/bitcoin20-300x300.png" alt="Bitcoin">
+                    </td>
+                    <td>R$ 536.139,21</td>
+                </tr>
+                <tr>
+                    <td>Ethereum
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Ethereum_logo_2014.svg/256px-Ethereum_logo_2014.svg.png" alt="Ethereum">
+                    </td>
+                    <td>R$ 17.920,43</td>
+                </tr>
+                <tr>
+                    <td>Binance Coin (BNB)
+                        <img src="https://cdn.prod.website-files.com/5e73a1e3ba24f2cd5dd2232a/65847d5cdc48ee90fbb44d28_620b31921bac94c44de5969d_bnb.webp" alt="BNB">
+                    </td>
+                    <td>R$ 3.739,62</td>
+                </tr>
+            </table>
+        </section>
+
+        <section class="video-container">
+            <h2>Calculadora</h2>
+            <p>Calcule quanto você pode comprar de uma criptomoeda com uma determinada quantia</p>
+            <form>
+              <label for="amount">Valor em R$:</label>
+              <input type="number" id="amount" placeholder="Digite o valor">
+              <label for="coin">Escolha a moeda:</label>
+              <select id="coin">
+                <option value="536139.21">Bitcoin</option>
+                <option value="17920.43">Ethereum</option>
+                <option value="3739.62">BNB</option>
+             </select>
+             <button type="button" onclick="calculate()">Calcular</button>
+            </form>
+            <p id="result"></p>
+            <h2>As criptomoedas estão revolucionando o mundo financeiro</h2>
+            <p>Veja mais detalhes neste vídeo abaixo</p>
+             <iframe width="560" height="315" 
+                 src="https://www.youtube.com/embed/R4X1Ktv16bA?si=8NS6BxxmEsZsKe-y" 
+                 title="YouTube video player" 
+                 frameborder="0" 
+                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                 referrerpolicy="strict-origin-when-cross-origin" 
+                 allowfullscreen>
+             </iframe>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Mundo das Criptomoedas - Página desenvolvida por Amilcar Ribeiro Rodrigues Júnior. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function calculate() {
+          const amount = document.getElementById('amount').value;
+          const coinValue = document.getElementById('coin').value;
+          const result = (amount / coinValue).toFixed(4);
+          document.getElementById('result').innerText = `Você pode comprar: ${result} moedas.`;
+        }
+        document.getElementById("sobre-btn").addEventListener("click", function () {
+        window.location.href = "sobre.html";
+    });
+    </script>
+</body>
+</html>

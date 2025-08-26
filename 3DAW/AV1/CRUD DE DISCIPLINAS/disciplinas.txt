@@ -1,0 +1,5 @@
+Estrutura de Dados;3ESD;3
+Banco de Dados;3BPD;3
+Matematica;1MAT;10
+Lingua Portuguesa;1LPO;2
+Fundamentos da Programacao;2FPR;8

@@ -1,4 +1,0 @@
-matricula;nome;email
-123;Maria; maria@email.com
-456;Joao; joao@email.com
-789;Ana; ana@email.com

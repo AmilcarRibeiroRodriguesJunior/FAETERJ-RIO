@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Pergunta de Múltipla Escolha</title>
+</head>
+<body>
+</html>
+
 <?php
 $arquivo="perguntas.txt";
 $salvo=false;

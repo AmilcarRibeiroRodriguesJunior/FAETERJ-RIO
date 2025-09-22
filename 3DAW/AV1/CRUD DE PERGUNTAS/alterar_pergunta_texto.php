@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Alterar Pergunta de Texto</title>
+</head>
+<body>
+</html>
+
 <?php
 if(!isset($_GET['id'])){ 
     echo "ID não especificado."; 

@@ -1,4 +1,5 @@
-id|pergunta|respostaA;respostaB;respostaC;respostaD;respostaE;respostaCorreta
-1|Qual eh a capital da Argentina?|Brasília;Rio de Janeiro;Porto Alegre;Minas Gerais;Bahia|Brasília
-2|Qual é a capital da Argentina?|La Plata;Cordoba;Bueno Aires;Mendoza;Sarandi|Bueno Aires
+id|pergunta|respostas|correta
+1|Qual eh a capital do Brasil?|Brasília;Rio de Janeiro;Porto Alegre;Minas Gerais;Bahia|Brasília
+2|Qual é a capital da Argentina?|La Plata;Cordoba;Buenos Aires;Mendoza;Sarandi|Buenos Aires
 3|Qual eh a capital da Colombia?|Bogota;Medellin;Bucaramanga;Cartagena;Cali|Bogota
+4|Qual é a capital da Alemanha?|Dortmund;Nuremberg;Berlim;Munique;Hamburgo|Berlim

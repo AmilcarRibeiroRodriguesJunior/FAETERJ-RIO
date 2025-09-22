@@ -1,3 +1,7 @@
 id|pergunta|resposta
 1|Quanto é 2 + 2?|4
 2|Quanto é 5 + 7?|12
+3|Quanto é 8 - 3?|5
+4|Quanto é 4 × 6?|24
+5|Quanto é 15 ÷ 3?|5
+6|Quanto é 10 + 25?|35

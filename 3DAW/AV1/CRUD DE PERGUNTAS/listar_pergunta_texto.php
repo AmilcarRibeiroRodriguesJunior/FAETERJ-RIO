@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Pergunta de Texto</title>
+</head>
+<body>
+</html>
+
 <?php
 $arquivo = fopen("perguntas_texto.txt", "r") or die("Erro ao abrir arquivo!");
 echo "<h2>Lista de Perguntas de Texto</h2>";

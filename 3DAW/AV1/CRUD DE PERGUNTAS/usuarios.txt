@@ -1,0 +1,6 @@
+id;nome;email
+1;joão;joao@email.com
+2;maria;maria@email.com
+3;fran;fran@gmail.com
+4;luiz;luiz@gmail.com
+5;sophia;sophia@gmail.com

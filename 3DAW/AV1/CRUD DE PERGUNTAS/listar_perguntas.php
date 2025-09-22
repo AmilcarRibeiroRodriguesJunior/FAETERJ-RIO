@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Pergunta de Múltipla Escolha</title>
+</head>
+<body>
+</html>
+
 <?php
 $arquivo = fopen("perguntas.txt", "r") or die("Erro ao abrir arquivo!");
 echo "<h2>Lista de Perguntas</h2>";

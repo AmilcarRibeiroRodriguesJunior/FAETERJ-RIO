@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Criar Pergunta</title>
+<script>
+function enviarPergunta(){
+    let pergunta=document.getElementById("pergunta").value;
+    let opA=document.getElementById("opA").value;
+    let opB=document.getElementById("opB").value;
+    let opC=document.getElementById("opC").value;
+    let opD=document.getElementById("opD").value;
+    let opE=document.getElementById("opE").value;
+    let correta=document.getElementById("correta").value;
+
+    if(pergunta.trim() === "" || correta.trim() === ""){
+        document.getElementById("msg").innerHTML = "Preencha a pergunta e a resposta correta!";
+        return;
+    }
+
+    let xmlhttp=new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function(){
+        if(this.readyState == 4){
+            if(this.status == 200){
+                document.getElementById("msg").innerHTML = this.responseText;
+            } else {
+                document.getElementById("msg").innerHTML = "Erro ao enviar (" + this.status + ")";
+            }
+        }
+    }
+
+    let params="pergunta=" + encodeURIComponent(pergunta) +
+                 "&opA=" + encodeURIComponent(opA) +
+                 "&opB=" + encodeURIComponent(opB) +
+                 "&opC=" + encodeURIComponent(opC) +
+                 "&opD=" + encodeURIComponent(opD) +
+                 "&opE=" + encodeURIComponent(opE) +
+                 "&correta=" + encodeURIComponent(correta);
+
+    xmlhttp.open("GET", "criar_pergunta_js.php?" + params, true);
+    xmlhttp.send();
+
+    document.getElementById("msg").innerHTML = "Enviando...";
+}
+</script>
+</head>
+<body>
+<h2>Criar Pergunta de Múltipla Escolha</h2>
+<form onsubmit="return false;">
+    Pergunta: <br>
+    <input type="text" id="pergunta" ><br><br>
+
+    Alternativa A: <input type="text" id="opA"><br>
+    Alternativa B: <input type="text" id="opB"><br>
+    Alternativa C: <input type="text" id="opC"><br>
+    Alternativa D: <input type="text" id="opD"><br>
+    Alternativa E: <input type="text" id="opE"><br><br>
+
+    Resposta correta: <input type="text" id="correta"><br><br>
+
+    <input type="button" value="Salvar Pergunta" onclick="enviarPergunta();">
+</form>
+<p id="msg"></p>
+</body>
+</html>

@@ -1,0 +1,30 @@
+001;Qual é a capital do Brasil?
+002;Quem foi o primeiro presidente do Brasil?
+003;Em que ano o Brasil declarou a sua independência?
+004;Quem proclamou a independência do Brasil?
+005;Qual é o maior estado brasileiro em área territorial?
+006;Qual é o menor estado do Brasil?
+007;Qual é o rio mais extenso do Brasil?
+008;Em que cidade brasileira se realiza o famoso Carnaval com desfiles de escolas de samba?
+009;Qual é a maior floresta tropical do mundo?
+010;Qual é o nome da moeda oficial do Brasil?
+011;Quantos estados federativos compõem o Brasil?
+012;Em que continente o Brasil está localizado?
+013;Qual é o idioma oficial do Brasil?
+014;Qual é o nome do hino nacional brasileiro?
+015;Qual é a data da Proclamação da República no Brasil?
+016;Quem foi o autor do livro "Dom Casmurro"?
+017;Qual é o bioma predominante na região Norte do Brasil?
+018;Qual é o ponto turístico mais famoso do Rio de Janeiro?
+019;Qual é o prato típico feito com feijão preto e carnes diversas?
+020;Qual é o nome do monumento localizado no alto do Corcovado?
+021;Em que cidade nasceu o jogador Pelé?
+022;Qual é o estado brasileiro conhecido como "Terra do Sol Nascente"?
+023;Em que cidade está localizada a sede do Congresso Nacional?
+024;Qual é o nome do maior estádio de futebol do Brasil?
+025;Quem foi o descobridor do Brasil segundo a história oficial?
+026;Qual é o nome da montanha mais alta do Brasil?
+027;Qual é o nome da maior usina hidrelétrica brasileira?
+028;Qual é o principal produto de exportação do Brasil?
+029;Qual é o nome da dança típica do Nordeste do Brasil?
+030;Qual é o nome do escritor que criou o personagem Saci-Pererê?

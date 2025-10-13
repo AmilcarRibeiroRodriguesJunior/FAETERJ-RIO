@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Alterar Pergunta</title>
+</head>
+<body>
+  <h2>Alterar Pergunta</h2>
+
+  <form id="buscarForm">
+    <label for="codigo">Código da Pergunta:</label>
+    <input type="text" id="codigo" name="codigo" required>
+    <button type="submit">Buscar Pergunta</button>
+  </form>
+
+  <form id="editarForm" style="display:none;">
+    <label for="pergunta">Texto da Pergunta:</label>
+    <textarea id="pergunta" name="pergunta"></textarea>
+    <button type="submit">Salvar Alterações</button>
+  </form>
+
+  <script>
+    var buscarForm=document.getElementById('buscarForm');
+    var editarForm=document.getElementById('editarForm');
+    var codigoInput=document.getElementById('codigo');
+    var perguntaInput=document.getElementById('pergunta');
+
+    buscarForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      var codigo=codigoInput.value;
+
+      var xhr=new XMLHttpRequest();
+      xhr.open('POST', 'buscar_pergunta.php', true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+      xhr.onload=function(){
+        if(xhr.status === 200){
+          var data=JSON.parse(xhr.responseText);
+          if(data.sucesso){
+            perguntaInput.value=data.pergunta;
+            editarForm.style.display='block';
+          } else {
+            alert('Pergunta não encontrada!');
+          }
+        }
+      };
+
+      xhr.send('codigo=' + encodeURIComponent(codigo));
+    });
+
+    editarForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      var codigo=codigoInput.value;
+      var novaPergunta=perguntaInput.value;
+
+      var xhr=new XMLHttpRequest();
+      xhr.open('POST', 'salvar_pergunta.php', true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+      xhr.onload=function(){
+        if(xhr.status === 200){
+          var data=JSON.parse(xhr.responseText);
+          if(data.sucesso){
+            alert('Pergunta alterada com sucesso!');
+            editarForm.style.display='none';
+            buscarForm.reset();
+          } else {
+            alert('Erro ao salvar.');
+          }
+        }
+      };
+
+      xhr.send('codigo=' + encodeURIComponent(codigo) + '&pergunta=' + encodeURIComponent(novaPergunta));
+    });
+  </script>
+</body>
+</html>

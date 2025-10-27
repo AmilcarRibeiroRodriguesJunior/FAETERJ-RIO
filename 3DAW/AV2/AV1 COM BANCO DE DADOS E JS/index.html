@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Gerenciar Perguntas</title>
+</head>
+<body>
+
+<h2>Sistema de Perguntas</h2>
+
+<fieldset>
+  <legend>Incluir</legend>
+  <input id="pergunta" placeholder="Pergunta">
+  <input id="tipo" placeholder="Tipo">
+  <input id="assunto" placeholder="Assunto">
+  <button onclick="incluir()">Incluir</button>
+</fieldset>
+
+<fieldset>
+  <legend>Listar</legend>
+  <input id="id_busca" placeholder="ID">
+  <button onclick="listar()">Listar</button>
+  <p id="resultado_busca"></p>
+</fieldset>
+
+<fieldset>
+  <legend>Alterar</legend>
+  <input id="id_alterar" placeholder="ID">
+  <input id="pergunta_alterar" placeholder="Nova Pergunta">
+  <input id="tipo_alterar" placeholder="Novo Tipo">
+  <input id="assunto_alterar" placeholder="Novo Assunto">
+  <button onclick="alterar()">Alterar</button>
+</fieldset>
+
+<fieldset>
+  <legend>Excluir</legend>
+  <input id="id_excluir" placeholder="ID">
+  <button onclick="excluir()">Excluir</button>
+</fieldset>
+
+<script>
+function incluir(){
+  const dados=new FormData();
+  dados.append("pergunta", document.getElementById("pergunta").value);
+  dados.append("tipo", document.getElementById("tipo").value);
+  dados.append("assunto", document.getElementById("assunto").value);
+
+  fetch("incluir_pergunta_bd.php", { method: "POST", body: dados })
+    .then(r => r.json())
+    .then(msg => alert(msg));
+}
+
+function listar(){
+  const dados=new FormData();
+  dados.append("id", document.getElementById("id_busca").value);
+
+  fetch("listar_pergunta_bd.php", { method: "POST", body: dados })
+    .then(r => r.json())
+    .then(res => {
+      if(typeof res === "object" && res.id){
+        document.getElementById("resultado_busca").innerText =
+          "ID: " + res.id +
+          " | Pergunta: " + res.pergunta +
+          " | Tipo: " + res.tipo +
+          " | Assunto: " + res.assunto;
+      } else {
+        document.getElementById("resultado_busca").innerText = res;
+      }
+    })
+    .catch(err => alert("Erro: " + err));
+}
+
+function alterar(){
+  const dados=new FormData();
+  dados.append("id", document.getElementById("id_alterar").value);
+  dados.append("pergunta", document.getElementById("pergunta_alterar").value);
+  dados.append("tipo", document.getElementById("tipo_alterar").value);
+  dados.append("assunto", document.getElementById("assunto_alterar").value);
+
+  fetch("alterar_pergunta_bd.php", { method: "POST", body: dados })
+    .then(r => r.json())
+    .then(msg => alert(msg));
+}
+
+function excluir(){
+  const dados = new FormData();
+  dados.append("id", document.getElementById("id_excluir").value);
+
+  fetch("excluir_pergunta_bd.php", { method: "POST", body: dados })
+    .then(r => r.json())
+    .then(msg => alert(msg));
+}
+</script>
+
+</body>
+</html>

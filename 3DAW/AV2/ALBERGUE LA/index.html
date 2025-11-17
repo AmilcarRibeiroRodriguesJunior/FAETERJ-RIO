@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albergue LA - Sistema de Reservas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #22d3ee 0%, #10b981 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        .card {
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 50px;
+            max-width: 500px;
+            margin: 100px auto;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo h1 {
+            color: #1e3a8a;
+            font-size: 36px;
+        }
+
+        h2 {
+            color: #1e3a8a;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-wrapper {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 2px solid #d1d5db;
+            border-radius: 50px;
+            padding: 15px 25px;
+        }
+
+        input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            color: #374151;
+            margin-left: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #1e3a8a;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .btn-primary:hover {
+            background: #1e40af;
+        }
+
+        .btn-success {
+            background: #34d399;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #10b981;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #1e3a8a;
+            text-decoration: underline;
+            margin-top: 10px;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .navbar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-menu {
+            background: #f3f4f6;
+            padding: 10px 20px;
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar-menu button {
+            width: auto;
+            padding: 0;
+            background: none;
+            color: #1e3a8a;
+            font-weight: 600;
+            border-radius: 0;
+        }
+
+        .navbar-menu button:hover {
+            text-decoration: underline;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .room-card {
+            background: white;
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .room-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .room-header h3 {
+            color: #1e3a8a;
+            font-size: 24px;
+        }
+
+        .room-info p {
+            margin-bottom: 10px;
+            color: #374151;
+            font-size: 16px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-disponivel {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-ocupado {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-confirmada {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-cancelada {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            color: #6b7280;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .stat-card p {
+            font-size: 48px;
+            font-weight: bold;
+        }
+
+        .stat-blue { color: #1e3a8a; }
+        .stat-green { color: #10b981; }
+        .stat-orange { color: #f97316; }
+        .stat-purple { color: #a855f7; }
+
+        .banner {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), #fbbf24;
+            border-radius: 30px;
+            padding: 80px 40px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .banner h1 {
+            color: white;
+            font-size: 32px;
+        }
+
+        .reservation-form {
+            background: #1e3a8a;
+            border-radius: 30px;
+            padding: 40px;
+            color: white;
+        }
+
+        .reservation-form label {
+            display: block;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .reservation-form input {
+            width: 100%;
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: none;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        table {
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background: #f3f4f6;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        tr {
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px;
+            background: white;
+            border-radius: 30px;
+        }
+
+        .credentials {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f3f4f6;
+            border-radius: 15px;
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .credentials p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="roleSelectScreen" class="screen active">
+        <div class="card">
+            <div class="logo">
+                <h1>🏢 ALBERGUE LA</h1>
+            </div>
+            <h2>ENTRAR COMO:</h2>
+            <button class="btn-primary" onclick="selectRole('admin')">👤 Admin</button>
+            <button class="btn-primary" onclick="selectRole('cliente')">👥 Cliente</button>
+        </div>
+    </div>
+
+    <div id="loginScreen" class="screen">
+        <div class="card">
+            <div class="logo">
+                <h1>🏢 ALBERGUE LA</h1>
+            </div>
+            <h2 id="loginTitle">BEM-VINDO AO ALBERGUE LA!</h2>
+            
+            <div class="input-group">
+                <div class="input-wrapper">
+                    <span>👤</span>
+                    <input type="text" id="username" placeholder="Usuário">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="input-wrapper">
+                    <span>🔑</span>
+                    <input type="password" id="password" placeholder="Senha">
+                </div>
+            </div>
+
+            <button class="btn-success" onclick="handleLogin()" id="loginBtn">Entrar</button>
+            <button class="btn-secondary" onclick="showScreen('roleSelectScreen')">← Voltar</button>
+
+            <div class="credentials">
+                <p><strong>Credenciais de teste:</strong></p>
+                <p><strong>Admin:</strong> admin / admin123</p>
+                <p><strong>Cliente:</strong> cliente1 / 123456</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="clientDashboard" class="screen">
+        <div class="navbar">
+            <div class="navbar-content">
+                <div><span>👤 <strong id="clientName"></strong></span></div>
+                <div><h1>🏢 ALBERGUE LA</h1></div>
+                <div><button onclick="logout()" style="color: #ef4444;">🚪 Sair</button></div>
+            </div>
+            <div class="navbar-menu">
+                <button onclick="showScreen('clientDashboard')">RESERVAR</button>
+                <button onclick="showMyReservations()">MINHAS RESERVAS</button>
+                <button onclick="loadServices()">SERVIÇOS</button>
+                <button onclick="loadLocation()">LOCALIZAÇÃO</button>
+                <button onclick="loadReviews()">AVALIAÇÕES</button>
+                <button onclick="loadSocial()">CONTATO</button>
+            </div>
+
+        </div>
+
+        <div class="container">
+            <div class="banner">
+                <h1>Albergue LA, o melhor cantinho de Santa Teresa feito para você!</h1>
+            </div>
+
+            <div class="grid">
+                <div class="room-card">
+                    <h2>BEM-VINDO AO ALBERGUE LA!</h2>
+                    <p style="margin: 20px 0;">ENCONTRE ACOMODAÇÕES PERSONALIZADAS COM OPÇÕES DE QUARTOS DIVERSOS.</p>
+                    <p style="margin: 20px 0;">RESERVE AGORA E NÃO PERCA A MELHOR EXPERIÊNCIA DO RIO DE JANEIRO!</p>
+                    <div style="background: #eff6ff; padding: 15px; border-radius: 15px;">
+                        <p><strong>Total de quartos disponíveis:</strong> <span id="availableRoomsCount">0</span></p>
+                    </div>
+                </div>
+
+                <div class="reservation-form">
+                    <label>Check in:</label>
+                    <input type="date" id="checkIn">
+                    <label>Check out:</label>
+                    <input type="date" id="checkOut">
+                    <button class="btn-success" onclick="searchRooms()">Reservar Agora!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="roomSelectionScreen" class="screen">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 30px;">
+                <h1 style="color: #1e3a8a; font-size: 36px;">Selecione seu Quarto</h1>
+                <button onclick="showScreen('clientDashboard')" style="background: transparent; color: #1e3a8a;">← Voltar</button>
+            </div>
+            <div class="grid" id="roomsGrid"></div>
+        </div>
+    </div>
+
+    <div id="myReservationsScreen" class="screen">
+        <div class="navbar">
+            <div class="navbar-content">
+                <div><span>👤 <strong id="clientName2"></strong></span></div>
+                <div><h1>🏢 ALBERGUE LA</h1></div>
+                <div><button onclick="logout()" style="color: #ef4444;">🚪 Sair</button></div>
+            </div>
+            <div class="navbar-menu">
+                <button onclick="showScreen('clientDashboard')">RESERVAR</button>
+                <button onclick="showMyReservations()">MINHAS RESERVAS</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <h1 style="color: #1e3a8a; font-size: 36px; margin-bottom: 30px;">Minhas Reservas</h1>
+            <div id="reservationsContainer"></div>
+        </div>
+    </div>
+
+    <!-- ======================= SERVIÇOS ======================= -->
+    <div id="servicesScreen" class="screen">
+        <div class="container">
+            <button onclick="showScreen('clientDashboard')" class="btn-secondary">← Voltar</button>
+            <h1 style="color:#1e3a8a; font-size:32px; margin-bottom:20px;">Serviços</h1>
+            <div id="servicesContainer" class="grid"></div>
+        </div>
+    </div>
+
+    <!-- ======================= LOCALIZAÇÃO ======================= -->
+    <div id="locationScreen" class="screen">
+        <div class="container">
+            <button onclick="showScreen('clientDashboard')" class="btn-secondary">← Voltar</button>
+            <h1 style="color:#1e3a8a; font-size:32px; margin-bottom:20px;">Localização</h1>
+            <div id="locationContainer"></div>
+        </div>
+    </div>
+
+    <!-- ======================= AVALIAÇÕES ======================= -->
+    <div id="reviewsScreen" class="screen">
+        <div class="container">
+            <button onclick="showScreen('clientDashboard')" class="btn-secondary">← Voltar</button>
+            <h1 style="color:#1e3a8a; font-size:32px; margin-bottom:20px;">Avaliações</h1>
+
+            <div id="reviewsContainer"></div>
+
+            <h2 style="margin-top:40px; color:#1e3a8a;">Enviar Avaliação</h2>
+            <div>
+                <label>Nota (1 a 5):</label>
+                <input type="number" id="reviewRating" min="1" max="5">
+                <label>Comentário:</label>
+                <textarea id="reviewComment" style="width:100%; height:100px;"></textarea>
+
+                <button onclick="sendReview()" class="btn-success">Enviar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================= REDES SOCIAIS ======================= -->
+    <div id="socialScreen" class="screen">
+        <div class="container">
+            <button onclick="showScreen('clientDashboard')" class="btn-secondary">← Voltar</button>
+            <h1 style="color:#1e3a8a; font-size:32px; margin-bottom:20px;">Redes Sociais</h1>
+            <div id="socialContainer"></div>
+        </div>
+    </div>
+
+    <div id="adminDashboard" class="screen">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 30px;">
+                <h1 style="color: #1e3a8a; font-size: 36px;">🏢 Painel Administrativo</h1>
+                <button class="btn-danger" onclick="logout()">🚪 Sair</button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total de Quartos</h3>
+                    <p class="stat-blue" id="totalRooms">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Disponíveis</h3>
+                    <p class="stat-green" id="availableRooms">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Ocupados</h3>
+                    <p class="stat-orange" id="occupiedRooms">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Reservas</h3>
+                    <p class="stat-purple" id="totalReservations">0</p>
+                </div>
+            </div>
+
+            <div class="grid">
+                <div class="room-card">
+                    <h2>Quartos Cadastrados</h2>
+                    <div style="max-height: 400px; overflow-y: auto; margin-top: 20px;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nº</th>
+                                    <th>Tipo</th>
+                                    <th>Preço</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="roomsTableBody"></tbody>
+                        </table>
+                        <button class="btn-success" style="margin-top:20px;" onclick="showCreateRoomForm()">+ Adicionar Quarto</button>
+                    </div>
+                </div>
+
+                <div class="room-card">
+                    <h2>Reservas Recentes</h2>
+                    <div style="max-height: 400px; overflow-y: auto; margin-top: 20px;" id="adminReservationsContainer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost/albergue/api.php';
+        let currentUser = null;
+        let userRole = null;
+        let selectedCheckIn = '';
+        let selectedCheckOut = '';
+        let availableRooms = [];
+
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        function selectRole(role) {
+            userRole = role;
+            if (role === 'admin') {
+                document.getElementById('loginTitle').textContent = 'ADMINISTRADOR';
+            } else {
+                document.getElementById('loginTitle').textContent = 'BEM-VINDO AO ALBERGUE LA!';
+            }
+            showScreen('loginScreen');
+        }
+
+        async function handleLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (!username || !password) {
+                alert('Preencha todos os campos!');
+                return;
+            }
+
+            document.getElementById('loginBtn').disabled = true;
+            document.getElementById('loginBtn').textContent = 'Entrando...';
+
+            try {
+                const response = await fetch(API_URL + '?action=login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password, role: userRole })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    currentUser = data.user;
+                    document.getElementById('username').value = '';
+                    document.getElementById('password').value = '';
+
+                    if (userRole === 'admin') {
+                        await loadAdminDashboard();
+                        showScreen('adminDashboard');
+                    } else {
+                        document.getElementById('clientName').textContent = currentUser.name;
+                        document.getElementById('clientName2').textContent = currentUser.name;
+                        await loadAvailableRooms();
+                        showScreen('clientDashboard');
+                    }
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro ao fazer login. Verifique se o servidor está rodando.');
+            } finally {
+                document.getElementById('loginBtn').disabled = false;
+                document.getElementById('loginBtn').textContent = 'Entrar';
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            userRole = null;
+            showScreen('roleSelectScreen');
+        }
+
+        async function loadAvailableRooms() {
+            try {
+                const response = await fetch(API_URL + '?action=rooms&status=disponivel');
+                const rooms = await response.json();
+                document.getElementById('availableRoomsCount').textContent = rooms.length;
+            } catch (error) {
+                console.error('Erro:', error);
+            }
+        }
+
+        async function searchRooms() {
+            const checkIn = document.getElementById('checkIn').value;
+            const checkOut = document.getElementById('checkOut').value;
+
+            if (!checkIn || !checkOut) {
+                alert('Por favor, preencha as datas');
+                return;
+            }
+
+            if (checkOut <= checkIn) {
+                alert('Data de check-out deve ser posterior ao check-in');
+                return;
+            }
+
+            selectedCheckIn = checkIn;
+            selectedCheckOut = checkOut;
+
+            try {
+                const response = await fetch(API_URL + '?action=rooms&status=disponivel');
+                availableRooms = await response.json();
+
+                if (availableRooms.length === 0) {
+                    alert('Não há quartos disponíveis');
+                    return;
+                }
+
+                displayRooms();
+                showScreen('roomSelectionScreen');
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro ao buscar quartos');
+            }
+        }
+
+        function displayRooms() {
+            const grid = document.getElementById('roomsGrid');
+            grid.innerHTML = '';
+
+            availableRooms.forEach(room => {
+                const card = document.createElement('div');
+                card.className = 'room-card';
+                
+                let desc = '';
+                if (room.description) {
+                    desc = '<p style="margin-top: 15px; color: #6b7280;">' + room.description + '</p>';
+                }
+
+                card.innerHTML = '<div class="room-header"><span style="font-size: 32px;">🛏️</span><h3>Quarto ' + room.number + '</h3></div><div class="room-info"><p><strong>Tipo:</strong> ' + room.type + '</p><p><strong>Capacidade:</strong> ' + room.capacity + ' pessoa(s)</p><p><strong>Preço:</strong> R$ ' + parseFloat(room.price).toFixed(2) + '/noite</p>' + desc + '</div><button class="btn-success" style="margin-top: 20px;" onclick="confirmReservation(' + room.id + ')">Reservar este Quarto</button>';
+                
+                grid.appendChild(card);
+            });
+        }
+
+        async function confirmReservation(roomId) {
+            if (!confirm('Confirmar reserva?')) return;
+
+            try {
+                const response = await fetch(API_URL + '?action=reservations', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        user_id: currentUser.id,
+                        room_id: roomId,
+                        check_in: selectedCheckIn,
+                        check_out: selectedCheckOut
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert('Reserva confirmada! Total: R$ ' + parseFloat(data.total_price).toFixed(2));
+                    document.getElementById('checkIn').value = '';
+                    document.getElementById('checkOut').value = '';
+                    await loadAvailableRooms();
+                    showScreen('clientDashboard');
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro ao criar reserva');
+            }
+        }
+
+        async function showMyReservations() {
+            try {
+                const response = await fetch(API_URL + '?action=reservations&user_id=' + currentUser.id);
+                const reservations = await response.json();
+
+                const container = document.getElementById('reservationsContainer');
+
+                if (reservations.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><div style="font-size: 64px;">📅</div><p style="font-size: 20px; color: #6b7280;">Você ainda não tem reservas</p></div>';
+                } else {
+                    container.innerHTML = '';
+                    reservations.forEach(reservation => {
+                        let statusClass = 'status-confirmada';
+                        if (reservation.status === 'cancelada') {
+                            statusClass = 'status-cancelada';
+                        }
+
+                        const card = document.createElement('div');
+                        card.className = 'room-card';
+                        card.style.marginBottom = '20px';
+
+                        let cancelBtn = '';
+                        if (reservation.status === 'confirmada') {
+                            cancelBtn = '<button class="btn-danger" onclick="cancelReservation(' + reservation.id + ')">Cancelar Reserva</button>';
+                        }
+
+                        card.innerHTML = '<div style="display: flex; justify-content: space-between; margin-bottom: 20px;"><div><h3 style="color: #1e3a8a;">Quarto ' + reservation.room_number + '</h3><p style="color: #6b7280;">' + reservation.room_type + '</p></div><span class="status-badge ' + statusClass + '">' + reservation.status + '</span></div><div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;"><div><p style="color: #6b7280; font-size: 14px;">Check-in</p><p style="font-weight: 600;">' + new Date(reservation.check_in).toLocaleDateString('pt-BR') + '</p></div><div><p style="color: #6b7280; font-size: 14px;">Check-out</p><p style="font-weight: 600;">' + new Date(reservation.check_out).toLocaleDateString('pt-BR') + '</p></div><div><p style="color: #6b7280; font-size: 14px;">Valor Total</p><p style="font-weight: 600; color: #10b981;">R$ ' + parseFloat(reservation.total_price).toFixed(2) + '</p></div></div>' + cancelBtn;
+                        
+                        container.appendChild(card);
+                    });
+                }
+
+                showScreen('myReservationsScreen');
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro ao carregar reservas');
+            }
+        }
+
+        async function cancelReservation(reservationId) {
+            if (!confirm('Deseja cancelar esta reserva?')) return;
+
+            try {
+                const response = await fetch(API_URL + '?action=cancel_reservation', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id: reservationId })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert(data.message);
+                    await showMyReservations();
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+            }
+        }
+
+        /* ======================= SERVIÇOS ======================= */
+        async function loadServices() {
+            try {
+                const res = await fetch(API_URL + "?action=services");
+                const data = await res.json();
+
+                const container = document.getElementById("servicesContainer");
+                container.innerHTML = "";
+
+                data.forEach(s => {
+                    container.innerHTML += `
+                        <div class="room-card">
+                            <h2>${s.title}</h2>
+                            <p>${s.description}</p>
+                        </div>
+                    `;
+                });
+
+                showScreen("servicesScreen");
+            } catch (e) {
+                alert("Erro ao carregar serviços");
+            }
+        }
+
+        /* ======================= LOCALIZAÇÃO ======================= */
+        async function loadLocation() {
+            try {
+                const res = await fetch(API_URL + "?action=location");
+                const loc = await res.json();
+
+                document.getElementById("locationContainer").innerHTML = `
+                    <div class="room-card">
+                        <h2>${loc.title}</h2>
+                        <p>${loc.description}</p>
+                        <p><strong>Endereço:</strong> ${loc.address}</p>
+                        <a href="${loc.map_url}" target="_blank" class="btn-success" style="margin-top:20px;">Ver no Google Maps</a>
+                    </div>
+                `;
+
+                showScreen("locationScreen");
+            } catch (e) {
+                alert("Erro ao carregar localização");
+            }
+        }
+
+        /* ======================= LISTAR AVALIAÇÕES ======================= */
+        async function loadReviews() {
+            try {
+                const res = await fetch(API_URL + "?action=reviews");
+                const reviews = await res.json();
+
+                const container = document.getElementById("reviewsContainer");
+                container.innerHTML = "";
+
+                reviews.forEach(r => {
+                    container.innerHTML += `
+                        <div class="room-card">
+                            <h3>${r.name} ⭐ ${r.rating}</h3>
+                            <p>${r.comment}</p>
+                        </div>
+                    `;
+                });
+
+                showScreen("reviewsScreen");
+            } catch (e) {
+                alert("Erro ao carregar avaliações");
+            }
+        }
+
+        /* ======================= ENVIAR AVALIAÇÃO ======================= */
+        async function sendReview() {
+            const rating = document.getElementById("reviewRating").value;
+            const comment = document.getElementById("reviewComment").value;
+
+            if (!rating || rating < 1 || rating > 5) return alert("Nota inválida");
+            if (!comment.trim()) return alert("Escreva um comentário");
+
+            try {
+                const res = await fetch(API_URL + "?action=reviews", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        user_id: currentUser.id,
+                        rating,
+                        comment
+                    })
+                });
+                const data = await res.json();
+
+                alert(data.message);
+                if (data.success) loadReviews();
+            } catch (e) {
+                alert("Erro ao enviar avaliação");
+            }
+        }
+
+        /* ======================= REDES SOCIAIS ======================= */
+        async function loadSocial() {
+            try {
+                const res = await fetch(API_URL + "?action=social");
+                const social = await res.json();
+
+                const container = document.getElementById("socialContainer");
+                container.innerHTML = `
+                    <div class="room-card">
+                        <h2>Facebook</h2>
+                        <p>@${social.facebook.handle}</p>
+                        <a href="${social.facebook.url}" target="_blank" class="btn-success">Visitar</a>
+                    </div>
+
+                    <div class="room-card">
+                        <h2>Instagram</h2>
+                        <p>@${social.instagram.handle}</p>
+                        <a href="${social.instagram.url}" target="_blank" class="btn-success">Visitar</a>
+                    </div>
+
+                    <div class="room-card">
+                        <h2>Twitter</h2>
+                        <p>@${social.twitter.handle}</p>
+                        <a href="${social.twitter.url}" target="_blank" class="btn-success">Visitar</a>
+                    </div>
+                `;
+
+                showScreen("socialScreen");
+            } catch (e) {
+                alert("Erro ao carregar contatos");
+            }
+        }
+
+        async function loadAdminDashboard() {
+            try {
+                const statsResponse = await fetch(API_URL + '?action=stats');
+                const stats = await statsResponse.json();
+
+                document.getElementById('totalRooms').textContent = stats.total_rooms || 0;
+                document.getElementById('availableRooms').textContent = stats.available_rooms || 0;
+                document.getElementById('occupiedRooms').textContent = stats.occupied_rooms || 0;
+                document.getElementById('totalReservations').textContent = stats.total_reservations || 0;
+
+                const roomsResponse = await fetch(API_URL + '?action=rooms');
+                const rooms = await roomsResponse.json();
+
+                const tbody = document.getElementById('roomsTableBody');
+                tbody.innerHTML = '';
+
+                rooms.forEach(room => {
+                    const statusClass = room.status === 'disponivel' ? 'status-disponivel' : 'status-ocupado';
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${room.number}</td>
+                        <td>${room.type}</td>
+                        <td>R$ ${parseFloat(room.price).toFixed(2)}</td>
+                        <td><span class="status-badge ${statusClass}">${room.status}</span></td>
+                        <td>
+                            <button class="btn-success" onclick='showEditRoomForm(${JSON.stringify(room)})'>Editar</button>
+                            <button class="btn-danger" onclick="deleteRoom(${room.id})">Excluir</button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+                const reservationsResponse = await fetch(API_URL + '?action=reservations');
+                const reservations = await reservationsResponse.json();
+
+                const adminContainer = document.getElementById('adminReservationsContainer');
+                adminContainer.innerHTML = '';
+
+                reservations.slice(0, 10).forEach(reservation => {
+                    let statusClass = 'status-confirmada';
+                    if (reservation.status === 'cancelada') statusClass = 'status-cancelada';
+
+                    const div = document.createElement('div');
+                    div.style.borderBottom = '1px solid #f3f4f6';
+                    div.style.paddingBottom = '15px';
+                    div.style.marginBottom = '15px';
+                    div.innerHTML = '<div style="display: flex; justify-content: space-between; margin-bottom: 10px;"><div><p style="font-weight: 600; color: #1e3a8a;">' + reservation.user_name + '</p><p style="color: #6b7280; font-size: 14px;">Quarto ' + reservation.room_number + '</p></div><span class="status-badge ' + statusClass + '">' + reservation.status + '</span></div><p style="color: #6b7280; font-size: 12px;">' + new Date(reservation.check_in).toLocaleDateString('pt-BR') + ' - ' + new Date(reservation.check_out).toLocaleDateString('pt-BR') + '</p>';
+                    adminContainer.appendChild(div);
+                });
+
+            } catch (error) {
+                console.error('Erro:', error);
+            }
+        }
+
+        let editingRoomId = null;
+
+        /* ============================= ABRIR FORM ============================ */
+        function showCreateRoomForm() {
+            editingRoomId = null;
+            document.getElementById("roomFormTitle").innerText = "Cadastrar Quarto";
+            document.getElementById("roomNumber").value = "";
+            document.getElementById("roomType").value = "";
+            document.getElementById("roomPrice").value = "";
+            document.getElementById("roomCapacity").value = "";
+            document.getElementById("roomDescription").value = "";
+            document.getElementById("roomFormModal").style.display = "block";
+        }
+
+        function showEditRoomForm(room) {
+            editingRoomId = room.id;
+            document.getElementById("roomFormTitle").innerText = "Editar Quarto";
+            document.getElementById("roomNumber").value = room.number;
+            document.getElementById("roomType").value = room.type;
+            document.getElementById("roomPrice").value = room.price;
+            document.getElementById("roomCapacity").value = room.capacity;
+            document.getElementById("roomDescription").value = room.description || "";
+            document.getElementById("roomFormModal").style.display = "block";
+        }
+
+        function closeRoomForm() {
+            document.getElementById("roomFormModal").style.display = "none";
+        }
+
+        /* ============================= SALVAR QUARTO ============================ */
+        async function saveRoom() {
+            const roomData = {
+                number: document.getElementById("roomNumber").value,
+                type: document.getElementById("roomType").value,
+                price: document.getElementById("roomPrice").value,
+                capacity: document.getElementById("roomCapacity").value,
+                description: document.getElementById("roomDescription").value
+            };
+
+            let url = API_URL + "?action=rooms";
+            let method = editingRoomId ? "PUT" : "POST";
+
+            if (editingRoomId) roomData.id = editingRoomId;
+
+            const res = await fetch(url, {
+                method,
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(roomData)
+            });
+
+            const data = await res.json();
+            alert(data.message);
+
+            if (data.success) {
+                closeRoomForm();
+                loadAdminDashboard();
+            }
+        }
+
+        /* ============================= DELETAR QUARTO ============================ */
+        async function deleteRoom(id) {
+            if (!confirm("Deseja mesmo excluir este quarto?")) return;
+
+            const res = await fetch(API_URL + "?action=rooms&id=" + id, {
+                method: "DELETE"
+            });
+            const data = await res.json();
+
+            alert(data.message);
+            if (data.success) loadAdminDashboard();
+        }
+
+        document.getElementById('password').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') handleLogin();
+        });
+
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('checkIn').setAttribute('min', today);
+        
+        document.getElementById('checkIn').addEventListener('change', function() {
+            document.getElementById('checkOut').setAttribute('min', this.value);
+        });
+    </script>
+    <!-- Modal para criar/editar quarto -->
+    <div id="roomFormModal" class="screen" style="background:rgba(0,0,0,0.7); position:fixed; top:0; left:0; width:100%; height:100%; display:none;">
+        <div class="card" style="max-width:500px;">
+            <h2 id="roomFormTitle">Novo Quarto</h2>
+
+            <label>Número:</label>
+            <input id="roomNumber">
+
+            <label>Tipo:</label>
+            <input id="roomType">
+
+            <label>Preço:</label>
+            <input id="roomPrice" type="number">
+
+            <label>Capacidade:</label>
+            <input id="roomCapacity" type="number">
+
+            <label>Descrição:</label>
+            <textarea id="roomDescription" style="width:100%; height:80px;"></textarea>
+
+            <button class="btn-success" onclick="saveRoom()">Salvar</button>
+            <button class="btn-danger" onclick="closeRoomForm()">Cancelar</button>
+        </div>
+    </div>
+</body>
+</html>

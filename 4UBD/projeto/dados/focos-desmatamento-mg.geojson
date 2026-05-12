@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"name": "focos-desmatamento-mg",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::31983" } },
+"features": [
+{ "type": "Feature", "properties": { "municipio": "Uberlandia", "bioma": "Cerrado", "data": "2022-08-10", "area_ha": 120, "longitude": -48.2772, "latitude": -18.9186 }, "geometry": { "type": "Point", "coordinates": [ 154757.983850510092452, 7904975.51695211417973 ] } },
+{ "type": "Feature", "properties": { "municipio": "Belo Horizonte", "bioma": "Mata Atlantica", "data": "2022-09-15", "area_ha": 45, "longitude": -43.9386, "latitude": -19.9167 }, "geometry": { "type": "Point", "coordinates": [ 611091.188376071746461, 7797386.074532057158649 ] } },
+{ "type": "Feature", "properties": { "municipio": "Montes Claros", "bioma": "Cerrado", "data": "2022-08-22", "area_ha": 300, "longitude": -43.865, "latitude": -16.7286 }, "geometry": { "type": "Point", "coordinates": [ 620992.259088153368793, 8150123.211408412083983 ] } }
+]
+}

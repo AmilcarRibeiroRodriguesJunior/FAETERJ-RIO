@@ -1,6 +1,6 @@
 BEGIN
 
-    INSERT INTO clientes (
+    INSERT INTO clientes(
         nome,
         email,
         cpf,
@@ -13,7 +13,7 @@ BEGIN
         cep,
         pais
     )
-    SELECT
+    SELECT DISTINCT
         c.buyer_name,
         c.buyer_email,
         c.cpf,
@@ -27,7 +27,7 @@ BEGIN
         c.ship_country
     FROM carga_pedidos c
     WHERE c.cpf IS NOT NULL
-      AND NOT EXISTS (
+      AND NOT EXISTS(
           SELECT 1
           FROM clientes cl
           WHERE cl.cpf = c.cpf

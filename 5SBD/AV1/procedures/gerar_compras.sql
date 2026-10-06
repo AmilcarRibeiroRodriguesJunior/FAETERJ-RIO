@@ -1,6 +1,6 @@
 BEGIN
 
-    INSERT INTO compras (
+    INSERT INTO compras(
         id_produto,
         id_pedido,
         quantidade,
@@ -18,7 +18,7 @@ BEGIN
         ON ped.id_pedido = i.id_pedido
     WHERE ped.status = 'PENDENTE'
       AND p.estoque < i.quantidade
-      AND NOT EXISTS (
+      AND NOT EXISTS(
           SELECT 1
           FROM compras c
           WHERE c.id_produto = i.id_produto

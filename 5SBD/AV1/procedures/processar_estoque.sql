@@ -12,7 +12,7 @@ BEGIN
         SELECT
             id_pedido
         FROM pedidos
-        WHERE status = 'PENDENTE'
+        WHERE status='PENDENTE'
         ORDER BY valor_total DESC;
 
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET fim = 1;
@@ -24,7 +24,7 @@ BEGIN
         FETCH cursor_pedidos
         INTO v_id_pedido;
 
-        IF fim = 1 THEN
+        IF fim=1 THEN
             LEAVE loop_pedidos;
         END IF;
 
@@ -36,7 +36,7 @@ BEGIN
         WHERE i.id_pedido = v_id_pedido
           AND p.estoque < i.quantidade;
 
-        IF v_itens_faltantes = 0 THEN
+        IF v_itens_faltantes=0 THEN
 
             BEGIN
 
@@ -68,7 +68,7 @@ BEGIN
                     FROM produtos
                     WHERE id_produto = v_id_produto;
 
-                    INSERT INTO movimentacao_estoque (
+                    INSERT INTO movimentacao_estoque(
                         id_produto,
                         id_pedido,
                         quantidade,
@@ -94,7 +94,7 @@ BEGIN
             END;
 
             UPDATE pedidos
-            SET status = 'ATENDIDO'
+            SET status='ATENDIDO'
             WHERE id_pedido = v_id_pedido;
 
         END IF;

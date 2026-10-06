@@ -7,7 +7,7 @@ BEGIN
     WHERE c.status = 'PENDENTE';
 
     UPDATE carga_fornecedor
-    SET status = 'PROCESSADO'
-    WHERE status = 'PENDENTE';
+    SET status='PROCESSADO'
+    WHERE status='PENDENTE';
 
 END

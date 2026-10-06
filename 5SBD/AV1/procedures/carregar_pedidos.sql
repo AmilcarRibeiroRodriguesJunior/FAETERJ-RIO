@@ -1,6 +1,6 @@
 BEGIN
 
-    INSERT INTO pedidos (
+    INSERT INTO pedidos(
         order_id,
         id_cliente,
         data_compra,
@@ -16,7 +16,7 @@ BEGIN
     FROM carga_pedidos c
     INNER JOIN clientes cl
         ON cl.cpf = c.cpf
-    WHERE NOT EXISTS (
+    WHERE NOT EXISTS(
         SELECT 1
         FROM pedidos p
         WHERE p.order_id = c.order_id

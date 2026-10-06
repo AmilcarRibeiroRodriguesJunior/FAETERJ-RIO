@@ -1,6 +1,6 @@
 BEGIN
 
-    INSERT INTO itens_pedido (
+    INSERT INTO itens_pedido(
         id_pedido,
         id_produto,
         order_item_id,
@@ -17,11 +17,11 @@ BEGIN
     INNER JOIN pedidos p
         ON p.order_id = c.order_id
     INNER JOIN produtos pr
-        ON pr.sku = c.sku
-    WHERE NOT EXISTS (
+        ON pr.sku=c.sku
+    WHERE NOT EXISTS(
         SELECT 1
         FROM itens_pedido i
-        WHERE i.id_pedido = p.id_pedido
+        WHERE i.id_pedido=p.id_pedido
           AND i.order_item_id = c.order_item_id
     );
 
